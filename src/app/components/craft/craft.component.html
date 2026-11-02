@@ -1,0 +1,29 @@
+<section class="craft" id="craft">
+  <div class="craft__pin">
+    <div class="craft__track">
+      <div class="craft__intro">
+        <span class="eyebrow">The craft</span>
+        <h2 class="display craft__title" geloraSplit>Slow is|the secret|ingredient.</h2>
+        <p class="craft__lede">Three steps, no shortcuts. Here is what happens before a scoop ever reaches your cone.</p>
+        <div class="craft__arrow" aria-hidden="true">
+          <span>Keep scrolling</span>
+          <svg viewBox="0 0 40 12" width="40" height="12"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+        </div>
+      </div>
+
+      @for (c of items; track c.index) {
+        <article class="panel">
+          <span class="panel__big display" aria-hidden="true">{{ c.index }}</span>
+          <div class="panel__body">
+            <h3 class="display panel__title">{{ c.title }}</h3>
+            <p>{{ c.copy }}</p>
+            <div class="panel__stat">
+              <strong class="display"><span [attr.data-count]="c.stat">{{ c.stat }}</span></strong>
+              <span>{{ c.unit }}</span>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

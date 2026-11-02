@@ -1,0 +1,41 @@
+<section class="flavors" id="flavors">
+  <div class="container">
+    <header class="flavors__head">
+      <span class="eyebrow" geloraReveal>The counter</span>
+      <h2 class="display flavors__title" geloraSplit>Six scoops|worth the detour.</h2>
+      <p class="flavors__lede" geloraReveal="0.15">
+        Churned this morning, gone by tonight. Tap a flavor to paint GELORA in its colors and watch it being made.
+      </p>
+    </header>
+
+    <div class="grid">
+      @for (p of theme.palettes; track p.id; let i = $index) {
+        <article
+          class="card"
+          [class.is-current]="theme.palette().id === p.id"
+          [style.--c-gelato]="p.gelato"
+          [style.--c-accent]="p.accent"
+          [style.--c-bg]="p.bgDeep"
+          [style.--c-ink]="p.ink"
+          [style.--c-accent-ink]="p.accentInk"
+          [geloraReveal]="(i % 3) * 0.08"
+        >
+          <div class="card__inner" geloraTilt="12">
+            <div class="card__glow" aria-hidden="true"></div>
+            <span class="card__num">0{{ i + 1 }}</span>
+            <span class="card__price">{{ p.price }}</span>
+            <div class="card__art">
+              <gelora-cone-art [color]="p.gelato" [dipped]="p.id === 'pistachio' || p.id === 'cacao'" [label]="p.flavor" />
+            </div>
+            <h3 class="display card__name">{{ p.flavor }}</h3>
+            <p class="card__notes">{{ p.notes }}</p>
+            <button type="button" class="card__btn" (click)="choose(p.id)">
+              {{ theme.palette().id === p.id ? 'On the counter' : 'Make this one' }}
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

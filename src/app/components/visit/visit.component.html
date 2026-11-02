@@ -1,0 +1,80 @@
+<section class="visit" id="visit">
+  <div class="container visit__grid">
+    <div class="visit__info">
+      <span class="eyebrow" geloraReveal>Visit &amp; order</span>
+      <h2 class="display visit__title" geloraSplit>Come by|for a cone.</h2>
+
+      <address class="visit__addr" geloraReveal="0.1">
+        Via dei Coni 12<br />
+        Old Town, by the fountain
+      </address>
+
+      <dl class="hours" geloraReveal="0.2">
+        @for (h of hours; track h[0]) {
+          <div>
+            <dt>{{ h[0] }}</dt>
+            <dd>{{ h[1] }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <div class="order" geloraReveal="0.1">
+      @if (sent(); as message) {
+        <div class="order__done" role="status">
+          <span class="order__check" aria-hidden="true">✓</span>
+          <h3 class="display">Order received</h3>
+          <p>{{ message }}</p>
+          <button type="button" class="pill pill--ghost" (click)="sent.set(null)">Order another</button>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <h3 class="display order__title">Skip the queue</h3>
+          <p class="order__lede">Reserve your cone and pick it up at the counter, finished in front of you.</p>
+
+          <label class="field" [class.is-invalid]="invalid('name')">
+            <span>Name</span>
+            <input type="text" formControlName="name" autocomplete="name" placeholder="Your name" />
+            @if (invalid('name')) {
+              <small>Tell us who the cone is for.</small>
+            }
+          </label>
+
+          <label class="field" [class.is-invalid]="invalid('email')">
+            <span>Email</span>
+            <input type="email" formControlName="email" autocomplete="email" placeholder="you@example.com" />
+            @if (invalid('email')) {
+              <small>We need a valid email to confirm.</small>
+            }
+          </label>
+
+          <div class="row">
+            <label class="field">
+              <span>Flavor</span>
+              <select formControlName="flavor">
+                @for (p of theme.palettes; track p.id) {
+                  <option [value]="p.id">{{ p.flavor }}</option>
+                }
+              </select>
+            </label>
+            <fieldset class="field scoops">
+              <legend>Scoops</legend>
+              <div class="scoops__opts">
+                @for (n of [1, 2, 3]; track n) {
+                  <label>
+                    <input type="radio" formControlName="scoops" [value]="n" />
+                    <span>{{ n }}</span>
+                  </label>
+                }
+              </div>
+            </fieldset>
+          </div>
+
+          <button type="submit" class="pill order__submit" geloraMagnetic>
+            Reserve my cone <span class="arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

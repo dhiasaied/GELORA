@@ -1,0 +1,39 @@
+<header class="nav">
+  <a class="brand" href="#top" (click)="go('#top', $event)" aria-label="GELORA home">
+    <svg class="brand__mark" viewBox="0 0 40 24" aria-hidden="true">
+      <path d="M8 13 C6 6 13 2 20 2 C27 2 34 6 32 13 Z" fill="currentColor" opacity=".9" />
+      <path d="M10 14 L20 23 L30 14 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+    </svg>
+    <span class="brand__name">Gelora</span>
+    <span class="brand__sub">Gelateria</span>
+  </a>
+
+  <nav class="links" aria-label="Primary">
+    @for (l of links; track l.target) {
+      <a [href]="l.target" [class.is-active]="active() === l.target" (click)="go(l.target, $event)">{{ l.label }}</a>
+    }
+  </nav>
+
+  <div class="actions">
+    <gelora-color-picker />
+    <a class="pill order" href="#visit" geloraMagnetic (click)="go('#visit', $event)">Order</a>
+    <button class="burger" type="button" (click)="toggleMenu()" [attr.aria-expanded]="state.menuOpen()" aria-controls="menu">
+      <span class="sr-only">{{ state.menuOpen() ? 'Close menu' : 'Open menu' }}</span>
+      <i></i><i></i><i></i>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" [class.is-open]="state.menuOpen()" [attr.aria-hidden]="!state.menuOpen()">
+  <nav class="menu__links" aria-label="Menu">
+    @for (l of links; track l.target; let i = $index) {
+      <a [href]="l.target" (click)="go(l.target, $event)" [style.transition-delay]="state.menuOpen() ? 0.15 + i * 0.06 + 's' : '0s'" [attr.tabindex]="state.menuOpen() ? 0 : -1">
+        <small>0{{ i + 1 }}</small>{{ l.label }}
+      </a>
+    }
+  </nav>
+  <div class="menu__foot">
+    <span>Via dei Coni 12, Open daily 11–23</span>
+    <a href="#visit" class="pill" (click)="go('#visit', $event)" [attr.tabindex]="state.menuOpen() ? 0 : -1">Order a cone</a>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--bg-deep);
+  color: var(--ink);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+
+  &__inner {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+  }
+
+  &__cone {
+    width: 70px;
+    height: 100px;
+    animation: bob 1.8s ease-in-out infinite;
+  }
+
+  &__brand {
+    font-size: clamp(56px, 11vw, 140px);
+    line-height: 0.9;
+  }
+
+  &__sub {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  &__count {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 36px;
+    font-size: clamp(40px, 7vw, 88px);
+  }
+
+  &__bar {
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 24px;
+    height: 2px;
+    background: var(--line);
+
+    span {
+      display: block;
+      height: 100%;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}

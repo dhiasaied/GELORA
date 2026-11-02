@@ -1,0 +1,152 @@
+.craft {
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.craft__pin {
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.craft__track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(20px, 3vw, 40px);
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+
+.craft__intro {
+  flex: none;
+  width: min(560px, 42vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 4vw;
+}
+
+.craft__title {
+  margin: 18px 0 22px;
+  font-size: clamp(48px, 6.4vw, 104px);
+}
+
+.craft__lede {
+  max-width: 360px;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.craft__arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  svg {
+    animation: nudge 1.6s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+.panel {
+  position: relative;
+  flex: none;
+  width: min(520px, 78vw);
+  min-height: min(70vh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(26px, 3vw, 44px);
+  border-radius: 32px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+
+  &__big {
+    position: absolute;
+    top: -0.12em;
+    right: 0.05em;
+    font-size: clamp(160px, 22vw, 340px);
+    line-height: 1;
+    color: var(--gelato);
+    -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 20%, transparent);
+    opacity: 0.9;
+  }
+
+  &__body {
+    position: relative;
+
+    p {
+      max-width: 380px;
+      margin: 0 0 30px;
+      color: var(--ink-soft);
+    }
+  }
+
+  &__title {
+    margin: 0 0 14px;
+    font-size: clamp(38px, 4vw, 60px);
+  }
+
+  &__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+
+    strong {
+      font-size: 44px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+  }
+}
+
+@media (max-width: 899px) {
+  .craft {
+    padding: 100px 0;
+  }
+
+  .craft__pin {
+    height: auto;
+    display: block;
+  }
+
+  .craft__track {
+    flex-direction: column;
+  }
+
+  .craft__intro {
+    width: 100%;
+    padding: 0 0 20px;
+  }
+
+  .craft__arrow {
+    display: none;
+  }
+
+  .panel {
+    width: 100%;
+    min-height: 420px;
+  }
+}

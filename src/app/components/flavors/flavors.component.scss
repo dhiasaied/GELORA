@@ -1,0 +1,165 @@
+.flavors {
+  position: relative;
+  padding: clamp(110px, 16vw, 200px) 0 clamp(80px, 12vw, 160px);
+  background: var(--bg);
+}
+
+.flavors__head {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 360px);
+  align-items: end;
+  gap: 18px 40px;
+  margin-bottom: clamp(48px, 7vw, 90px);
+
+  .eyebrow {
+    grid-column: 1 / -1;
+  }
+}
+
+.flavors__title {
+  margin: 0;
+  font-size: clamp(44px, 7vw, 112px);
+}
+
+.flavors__lede {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 26px);
+}
+
+.card {
+  perspective: 1000px;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 470px;
+    padding: 26px;
+    border-radius: 28px;
+    overflow: hidden;
+    color: var(--c-ink);
+    background:
+      radial-gradient(90% 60% at 50% 30%, color-mix(in srgb, var(--c-gelato) 55%, transparent), transparent 70%),
+      var(--c-bg);
+    box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.6s var(--ease-out);
+  }
+
+  &:hover &__inner {
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.55);
+  }
+
+  &__glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(400px circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.35), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  &:hover &__glow {
+    opacity: 1;
+  }
+
+  &__num,
+  &__price {
+    position: absolute;
+    top: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  &__num {
+    left: 26px;
+    opacity: 0.6;
+  }
+
+  &__price {
+    right: 26px;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--c-accent);
+    color: var(--c-accent-ink);
+    letter-spacing: 0.06em;
+    mix-blend-mode: normal;
+  }
+
+  &__art {
+    width: 130px;
+    height: 190px;
+    margin: 34px auto 18px;
+    transform: translateZ(60px);
+    transition: transform 0.8s var(--ease-out);
+    filter: drop-shadow(0 22px 22px rgba(0, 0, 0, 0.22));
+  }
+
+  &:hover &__art {
+    transform: translateZ(60px) translateY(-10px) rotate(-6deg);
+  }
+
+  &__name {
+    margin: auto 0 8px;
+    font-size: clamp(26px, 2.4vw, 34px);
+    transform: translateZ(30px);
+  }
+
+  &__notes {
+    margin: 0 0 20px;
+    font-size: 14px;
+    opacity: 0.75;
+  }
+
+  &__btn {
+    align-self: flex-start;
+    display: inline-flex;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 99px;
+    border: 1px solid currentColor;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+
+    &:hover {
+      background: var(--c-ink);
+      border-color: var(--c-ink);
+      color: var(--c-bg);
+    }
+  }
+
+  &.is-current &__btn {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-accent-ink);
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .flavors__head {
+    grid-template-columns: 1fr;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card__inner {
+    min-height: 420px;
+  }
+}
